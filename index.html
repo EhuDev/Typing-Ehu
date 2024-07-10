@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Typing-Ehu</title>
+  </head>
+  <body>
+    <div
+      class="flex items-center py-16 flex-col min-h-screen m-0 font-roboto bg-[#333] text-[#fff]"
+    >
+      <div class="flex space-x-4">
+        <img src="keyboard.png" alt="icon" class="w-24 h-24 mt-2" />
+        <div class="py-10 text-5xl text-[#FFC107] font-bold font-outline-2">
+          Typing-Ehu
+        </div>
+      </div>
+
+      <div class="w-[600px] p-4 rounded-lg max-w-[90%]">
+        <button id="new-game-btn" class="bg-[#666] rounded-lg w-24 float-end">
+          New Game
+        </button>
+        <div class="mx-5 mb-6 text-[#FFC107] text-lg" id="timer">0</div>
+        <div class="mb-8 mx-5 text-2xl text-center" id="content">
+          Loading.....
+        </div>
+
+        <p class="hidden text-lg text-center text-[#FFC107]" id="score">
+          Your Score: <span id="quote-counter">0</span>
+        </p>
+
+        <input id="quote-input" type="hidden" />
+      </div>
+    </div>
+    <script src="index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </body>
+</html>
