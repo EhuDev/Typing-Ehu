@@ -1,4 +1,4 @@
-const RANDOM_QUOTE_API_URL = "https://type.fit/api/quotes";
+const RANDOM_QUOTE_API_URL = "https://zenquotes.io/api";
 
 const quoteContainer = document.getElementById("content");
 const quoteInput = document.getElementById("quote-input");
