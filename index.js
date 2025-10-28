@@ -17,7 +17,11 @@ const getQuotes = async () => {
   const targetUrl = "https://type.fit/api/quotes";
 
   try {
-    const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
+    // ✅ Use a more stable public proxy
+    const response = await fetch(
+      `https://thingproxy.freeboard.io/fetch/${targetUrl}`
+    );
+
     if (!response.ok) throw new Error("Failed to fetch quotes");
 
     const data = await response.json();
@@ -25,7 +29,7 @@ const getQuotes = async () => {
   } catch (error) {
     console.error("Error fetching quotes:", error);
 
-    // ✅ Fallback quotes
+    // ✅ Fallback quotes in case of proxy error
     return [
       { text: "Keep typing and never give up!", author: "AI" },
       { text: "Focus on progress, not perfection.", author: "Anonymous" },
