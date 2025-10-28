@@ -1,4 +1,4 @@
-const RANDOM_QUOTE_API_URL = "https://type.fit/api/quotes";
+
 
 const quoteContainer = document.getElementById("content");
 const quoteInput = document.getElementById("quote-input");
@@ -14,8 +14,12 @@ let currentIndex = 0;
 let quoteCounter = -1;
 
 const getQuotes = async () => {
-  const response = await fetch(RANDOM_QUOTE_API_URL);
-  const data = await response.json();
+  const proxyUrl = "https://api.allorigins.win/get?url=";
+  const targetUrl = "https://type.fit/api/quotes";
+  
+  const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+  const result = await response.json();
+  const data = JSON.parse(result.contents);
   return data;
 };
 
