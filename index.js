@@ -14,11 +14,8 @@ let currentIndex = 0;
 let quoteCounter = -1;
 
 const getQuotes = async () => {
-  const response = await fetch(
-    `https://api.allorigins.win/get?url=${encodeURIComponent(RANDOM_QUOTE_API_URL)}`
-  );
-  const result = await response.json();
-  const data = JSON.parse(result.contents);
+  const response = await fetch(RANDOM_QUOTE_API_URL);
+  const data = await response.json();
   return data;
 };
 
