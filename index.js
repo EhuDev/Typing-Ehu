@@ -14,13 +14,29 @@ let currentIndex = 0;
 let quoteCounter = -1;
 
 const getQuotes = async () => {
-  const proxyUrl = "https://api.allorigins.win/get?url=";
   const targetUrl = "https://type.fit/api/quotes";
-  
-  const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
-  const result = await response.json();
-  const data = JSON.parse(result.contents);
-  return data;
+
+  try {
+    // ✅ Try using Codetabs proxy first (returns JSON directly)
+    const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${targetUrl}`);
+
+    if (!response.ok) throw new Error("Codetabs proxy failed");
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.warn("Codetabs failed, trying AllOrigins...", error);
+
+    // ✅ Fallback: AllOrigins proxy (needs JSON.parse)
+    const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
+    const response = await fetch(proxyUrl);
+
+    if (!response.ok) throw new Error("AllOrigins proxy failed");
+
+    const result = await response.json();
+    const data = JSON.parse(result.contents);
+    return data;
+  }
 };
 
 
