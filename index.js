@@ -17,27 +17,21 @@ const getQuotes = async () => {
   const targetUrl = "https://type.fit/api/quotes";
 
   try {
-    // ✅ Try using Codetabs proxy first (returns JSON directly)
-    const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${targetUrl}`);
-
-    if (!response.ok) throw new Error("Codetabs proxy failed");
+    // 🩵 Use a stable proxy that returns JSON directly (no parsing needed)
+    const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`);
+    if (!response.ok) throw new Error("Failed to fetch quotes");
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.warn("Codetabs failed, trying AllOrigins...", error);
-
-    // ✅ Fallback: AllOrigins proxy (needs JSON.parse)
-    const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
-    const response = await fetch(proxyUrl);
-
-    if (!response.ok) throw new Error("AllOrigins proxy failed");
-
-    const result = await response.json();
-    const data = JSON.parse(result.contents);
-    return data;
+    console.error("Error fetching quotes:", error);
+    return [
+      { text: "Practice makes perfect.", author: "Anonymous" },
+      { text: "Keep typing and stay focused!", author: "AI Buddy" }
+    ]; // fallback quotes
   }
 };
+
 
 
 const renderQuote = async () => {
