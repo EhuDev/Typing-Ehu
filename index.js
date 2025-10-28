@@ -17,19 +17,17 @@ const getQuotes = async () => {
   const targetUrl = "https://type.fit/api/quotes";
 
   try {
-    // ✅ Use a more stable public proxy
     const response = await fetch(
-      `https://thingproxy.freeboard.io/fetch/${targetUrl}`
+      `https://api.codetabs.com/v1/proxy/?quest=${targetUrl}`
     );
 
     if (!response.ok) throw new Error("Failed to fetch quotes");
-
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching quotes:", error);
 
-    // ✅ Fallback quotes in case of proxy error
+    // ✅ Fallback quotes if proxy fails
     return [
       { text: "Keep typing and never give up!", author: "AI" },
       { text: "Focus on progress, not perfection.", author: "Anonymous" },
@@ -37,6 +35,7 @@ const getQuotes = async () => {
     ];
   }
 };
+
 
 
 const renderQuote = async () => {
