@@ -17,21 +17,22 @@ const getQuotes = async () => {
   const targetUrl = "https://type.fit/api/quotes";
 
   try {
-    // 🩵 Use a stable proxy that returns JSON directly (no parsing needed)
-    const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`);
+    const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
     if (!response.ok) throw new Error("Failed to fetch quotes");
 
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching quotes:", error);
+
+    // ✅ Fallback quotes
     return [
-      { text: "Practice makes perfect.", author: "Anonymous" },
-      { text: "Keep typing and stay focused!", author: "AI Buddy" }
-    ]; // fallback quotes
+      { text: "Keep typing and never give up!", author: "AI" },
+      { text: "Focus on progress, not perfection.", author: "Anonymous" },
+      { text: "Practice makes progress.", author: "Coder" },
+    ];
   }
 };
-
 
 
 const renderQuote = async () => {
